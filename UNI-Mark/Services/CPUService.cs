@@ -48,7 +48,6 @@ namespace UNI_Mark.Services
                 PhysicalMemoryCapacity = Math.Round(Convert.ToDouble(obj["Capacity"]) / (1024 * 1024 * 1024), 2).ToString();
                 PhysicalMemorySpeed = obj["Speed"].ToString();
             }
-
         }
     }
 }
