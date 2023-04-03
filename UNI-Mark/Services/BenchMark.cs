@@ -7,6 +7,8 @@ namespace UNI_Mark.Services
         private readonly Stopwatch _stopwatch;
 
         public TimeSpan Elapsed { get; private set; }
+        public double Performance { get; private set; }
+        public double Punctuation { get; private set; }
 
         public BenchMark()
         {
@@ -21,6 +23,8 @@ namespace UNI_Mark.Services
 
             _stopwatch.Stop();
             Elapsed = _stopwatch.Elapsed;
+            Punctuation = array.Length / Elapsed.TotalMilliseconds;
+            Performance = 1 / Elapsed.TotalSeconds;
         }
 
         private static void SelectionSort(int[] arr)
