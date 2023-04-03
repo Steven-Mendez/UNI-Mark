@@ -12,8 +12,7 @@ namespace UNI_Mark.Services
         public string? ComputerSystemTotalPhysicalMemory { get; }
         public string? LogicalDiskDescription { get; }
         public string? LogicalDiskFreeSpace { get; }
-        public string? PhysicalMemoryCapacity { get; }
-        public string? PhysicalMemorySpeed { get; }
+        public List<(string, string)> PhysicalMemory { get; set; } = new List<(string, string)> ();
 
         public CPUService()
         {
@@ -45,8 +44,10 @@ namespace UNI_Mark.Services
             searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PhysicalMemory");
             foreach (var obj in searcher.Get().Cast<ManagementObject>())
             {
-                PhysicalMemoryCapacity = Math.Round(Convert.ToDouble(obj["Capacity"]) / (1024 * 1024 * 1024), 2).ToString();
-                PhysicalMemorySpeed = obj["Speed"].ToString();
+                var capity = Math.Round(Convert.ToDouble(obj["Capacity"]) / (1024 * 1024 * 1024), 2).ToString();
+                var speed = obj["Speed"].ToString();
+                var physicalMemory = (capity, speed);
+                PhysicalMemory.Add(physicalMemory!);
             }
         }
     }
