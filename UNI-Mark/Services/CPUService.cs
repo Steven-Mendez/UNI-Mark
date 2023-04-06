@@ -38,7 +38,7 @@ namespace UNI_Mark.Services
             foreach (var queryObj in searcher.Get().Cast<ManagementObject>())
             {
                 LogicalDiskDescription = queryObj["Description"].ToString();
-                LogicalDiskFreeSpace = queryObj["FreeSpace"].ToString();
+                LogicalDiskFreeSpace = Math.Round(Convert.ToDouble(queryObj["FreeSpace"]) / (1024 * 1024 * 1024), 2).ToString();
             }
 
             searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PhysicalMemory");
